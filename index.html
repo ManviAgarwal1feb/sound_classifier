@@ -1,0 +1,53 @@
+
+<html>
+    <head>
+      <title>Sound Controlled Animals</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sigmar+One&family=Yellowtail&family=Yeseva+One&display=swap" rel="stylesheet">
+    </head>
+  
+    <body>
+        <center>
+  <div class="header_div col-xs-12 text-center">
+    <h1>Sound Controlled Animals</h1>
+   <p>Note: Play different sounds like roaring,meowing,barking,chirp
+  </p>
+  </div> 
+  
+  <div class="main_div">
+    <hr>
+    <button class="btn btn-warning" onclick="sound_classification()">Start</button>
+    <h2 id="result_label">I can hear:</h2>
+    <h3 id="accuracy_result">Accuracy</h3>
+    <br>
+    <br>
+    <img id="alien_1" width="300" height="300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMPr2K0okN8j_r2DGQS7i18qxTOPVcCodz5czgiQKu0Bor7o9eOXOGeEZNk4BIp5QiyI&usqp=CAU">
+    <img id="alien_2" width="300" height="300" src="https://i.pinimg.com/originals/5c/1b/bb/5c1bbb64c853bdbf9b564084c1240396.png">
+    <img id="alien_3" width="300" height="300" src="https://www.freeiconspng.com/uploads/sweet-cute-little-baby-lion-png-21.png">
+    <img id="alien_4" width="300" height="300" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADjCAMAAADdXVr2AAAA/FBMVEX29vZht9I6eZgGFyH+sWv29vX2+PlctdH6+PhfttL+r2Y5d5b6+fk6eZn9rmVjutUtcpLs9vn79Oxaqsaj0uKz2ucAAA/5tHRfsc1Lk7H5un/o9Pn69/PI5e5sudGHxNnX7PP748z617ZFi6lTh6B6v9X66tr78OX5uHv5wo/5vYX6sW2XzN6Lxtu93+oAAAgADhhUoL3D1+GJq72bucj60Kr5w4/5yJqby9tTlq1HgZRKiJ06aXoVMkAFHioAAAEsUmPEyLqxsp6etKuJs7d0s8LltH7UtIohQE7AtJgtVGVjkaiqw9A+coQzYHF7obbp489XgYqRwMujwsNqbcHwAAAM8UlEQVR4nO2d93viRhrHLYxGI2lAEohimgU2bmDW4JZtSW5zySWxN87d/f//y82MRBcgiXdUOH9/8ONVyurzvHWqjo7e9a53vetd73rXu/4/JGOCLCvptxAjmaDmaNj/wZKTfhMRIlalX1eUITpEOmxVJEWSlFuU9JuIEHE6iipJaucgPZOM6hSOGq+Nk36V/YWployEK4rE6W4PIfCcdttpWsQ1FOXBbZdOUpxDMF6bJkilM3SI9+em6tHdkmTfDEbY4TCKjZixZHR6SMY7YnwcSDllfGRE/8Dsp/YPpSgQ2+UbUiCrM/XN0WEYjzpk0yOqEDzyXFPqWAeCJx9haj7ukE3UnxrPPhC6owXz3TpT4x1KYuEiQxdL7Xt0Ek0sB1DTPeGZ1abG80ksGcadms+T2kHEFSZYzjCXp2n0TfH69pDJrlTcjg1nHHHaR0/5lLmkTt8eOZQxy4gr7imtwnZOKw4iGU2nmFi2uhHPzTYU0XasLBKSpi1tNt6iFSkhyhggRmxmZYfx5oT9kZWhMJSx0w9guUXCjt0kGQCUGRw3XUgpEgXEGSj02LoNDecBWukfzbMpvyh0DLAzSnuSIaNgCcVXqtJ3UmtAFnekEtV0ngG9CZo0Sj5C9n50DLCT2nEhAB3lUysolVWQQNAxwGHqZmXk/eNuga/fxO7/NCWSvflMKL7UBeDa7MOeclLVpMlstnaPkrcqVXLSlF9mCwlwgCnyT7i0MseTmmnhc9eEgKWkZqUahRvfBeU7TcGSEnBNWOIbpoCPjvA6gDlzia+SggEEVDPmx9dOnG9lPhpUrPwljCfQeDx9JsuHBRpPSj59YpHGY3x2ouEnLG16UhPdcoAF1bwF1RNMLwS8l15Xct2Z3NzomgYTCF5y6QVvGioY9Y+fPn0ewwAqPySUXkjf13pG/cvxh2q1+uHrZxi+USJ8yN83jY8/Vo+57n76GQIvkfSC5It/+Pmm8bF6dzxV9XcI+6mdZrzpBaFW90b75odX/zqnOz7+8B2CT2H7CWMilI8QuXysFTXtFx884/uH40VVy1GZVEmdOX98gz9muOeBlqf6p0/sGV+Pl/Eimo9mXbVer6v0F/a3xDT4Q6jUu8lzuPzg13U8o1xdxruLEn2GWj45y7k6G9dZganHsI/e88q8qyufhpMmlmW8469h8QypfJbTdT2nUzid/0YJRQ/+aGQzryzmp9J+U0TgGeMzXS/klqTnTupSX/AOitbTzHAc719+mWXs45whRhVG+UzP+YgBCj6jg0rPxUW8P3xbsh9XUsuXUNY78YXjgIUT0YM/0hvM7edf9owvy+b7MA6BV89tpOMW5OlToIeii5u5AX/xdbrysvH+DE5nlLewcT7zQfDiO2o9ap4BB35lj77k558WIu/Hegi6babjKpgvTdEO2q25fDWfssdf89OHaVtW/VoObLwgdJQvNxHMhy6fipvKnvuiH3+vVu/u7qp3f9WDu+b2uJvLfBXdv7R6tG+hZc//PVkf9fH7nz//9Sm46eh/FZCOGvBe9NotumhovmVvZsCwkxGGf7nzt9+b6JOArAT6lz3PgCFljHUWWsH5BDegCPf8hkNRFdg1Pb4XS+j+SLauF21ro6+48ULzCRUkXkjjMb5zwfs/KR7YBHxY41Hp52IL/LaTCiFlnO3GWRJLQnpO6PZPQLx6eOMxPl0kH9zCZejEMuMT2KDBLe2FKelLKghs0DYuMITHiwZH8Qrmg6gGDW5tL1rocb6ceS+oQZvdlrC3IoaeK1EFXobawxk1s0ztdy4mgVowdJKxefookAQlUKsDhBc1cc4kZAoGncI0ZaF7Fh++Nwv8yDFU2wKAl2NTMMB4UIUPAk+Ag0JVBhg8WiFYBoUzodxMFd50khcMEMHsuILCoy3o+QTwJDW5haADKAwz6eYb3DFcoNyyb1lfkqk/WECAQEdrQPHYNP0rECBMW7ZXz+knDji7KC26CEzfsnvtJJzoMDD30Nw/yQAFX/Tx3maZ5ttk3ys3aPBBmC/yaH2rdPP8wSHEq4SRvBRmrzFY4VuVab68smtTtrFt+2cwXTVs6lySblIbTtj9PhsRSnjDaFGGajuhU+ca4duk6W9EQv7+e3Lvfx8x/ddhjjGIyC1LMiniPfVT5F5GhWVqTkwIsiYP/9623AuzjiImtyyLGtHUX94eXicTh2oyeX14O6fPCubL5jvUYGYDBQbfOuOC+N9qbturZgXf2LFF0IU9hMyHbfNQQKt8idHp51s3qsHkzti8c03mjklEmMqelHeabzumSGHWwQCHtGFUyO04Py7DzLiAD4qCKcACGtCVA6E3D+yrAs0rL7uXl4CSSxLmM4NcvQEzYaYmQLe15M3MBzKojd18BVryAo0ErQ7EbSaxJ09zEmwwn+I5iW10gVzzCOxofryty45ubFFQW1zic89CwQy+ZC03QcYNUj0uuhCuyQS0hSe+7MnGsCHwgLYRxBV+BT3ccU6aPEEmrNV4ws8Mu1QNdbtCLM2LeR92pwjYFqygxxmiqxCkk14V1F1lRln82CHCJWFg9+jtPCi1r/j8Q2jzgW1fFWy/qHtAwe5uEWq/iEd0ZBluB6QhLr+Yb5FPqEJuHhdU/8wISXNmQMB7ocTUd/3ckiNurZNh7xai/Rk44L5HOxCcewpIoJRuz+0EkDdfGcABCHAsBzt1wFtkQQdIJsShI9ibVgErhLm3Z3JBhh8DHMMA0ooAsp9ctmAvW4WJQPMeaq8u+K2Im27JCKwC6zPBdrHidh344kDmoXsQAh/lh7850JCihSA7xgh/EYOAO0kNld1SE4HO1F/Bz3AAp08XkMVgGEJ+AtV8E3HCCAEei14grJ/kwhDq5gvk3vG5MPw18S6gVD4Jmmb4lk4PDvqMH7ZEXd3JLvliNtzOyHYCOgK/OyLKfpzQqI/PNiHq3Lr3EyT2XhAsJv5mhGp9zK9q05eVy52djMs2kiPvwQ3MJyB/elJdRAZZHo9PTk7Ozs7oz/G4XKePFTuWGwWRDbMwtl3GotiD2C6TJyPo/my31BgvY93jm2cRpUjtGL8Tg5sx3O28SNeJ9ztpMg3A+BxUuY39FmvSjs1B6/F/Ak6mDiqyAs7Fwi5mOJcQjcJ/EDM83WkzqY8zkSbg1UP+cGpF9O1lW0QNKDACVVU5TfjLktiyFSXCDW1BpEgp+C4ocU6FeKiiDNPwSS0Zo3YfHJD7JcBRUghhNIIFVJV+O3m/nIsDgiUZpT9K26dAqYueggAqHC5pnHVh5AylPX1UVZTbVLnlojBpVqiPRiZU+FfMUwrHhKkJ7U4kQso2bENdnSBOU0IWh0EpqU9KjC3FhlsQJsip3FJ7KOpuQIqm9O05W5rNN5unkzGxnMp/fmWMG4yoMjClc2q3m/veJJCIMHmu/fZHxT7tMMhVSZ3+0B451o4D9ilWqaZpPUJd1Wo67VHFtof2cGjb//327ZvjNBlYVsmY0EU+n7/gc6+YnyjHrq417TmzJpsL9Yr5WmvtaWmQL3bT8P3SPYW4mdaeXmha/vIA8Fq1vNZb46A21RprNs2eFkJvUeTJz6bZEw+90spD+ajV8LNp9oQeNe1pPfQuDySzkBtNe1wPvQstny8dAJ5/AUA9zadaZE8bMgt12fxTBjvMVaGuT2Zxi+G6y2ZP1Au1m3UzyTQiDyFxkmda39Y5SrXDSJzYN3Ee0bqgHQAekmt+HOjSN+FkTixxUi9cHfawx4PsN9TospbPazdrILyq97LecqLSDfukmHa16oetZ/q8+Jjxwke8TxZqtYu5f7LvAD3y58XHVpb9k5V072uFg8X0grre4+Jzhvl44LGvwXFbdWeRhkruV/Doz+J1dttqWtHzg6c8HZT3GM0sk+Bnl+6iofmlnYyIJX/tkQ5mGy3Uy88zCXfZBi0MJZZ4tKuM8tGBHm2muxrFo0gDbRppLdrHXHV53StdF3naSfpVI4gZqdijP7WrFjPlNNL48y5tymjXglostQ4y2J3J+IkaqTUbD6GLK+qJjUvUatAhRKvk9WqYp53sFXjWVVLjsfaEdV+yTEs890TqrbRLa115M0mkl8kCyGcbSohRam5N598l1moNlkqPyGw4Ow3LhN83pFgCYfOYrflUC2q5zQozG58/m2ZSFpY36yP6FIv7Jg+uxny8h2T2VVTurItTSeiyweyXpcUUllIGrCNBdLR+7eHJzBPzfNaTxaQ2rQisQBSvM4VHne+GR9zSJPU8pZTclQfZe/z4nKnqh568KZaZl7qP3XpHfyPL60aIZImOGc2DIjf5+SS8N0qXp1bNFNNM9PVb3a6XGCnHYB5lV8VrnlF48GWwXZkKTYkua9qid3ZLbsBNK0fWhbqNWdGWZ9Tcfa8PAI/mRdlvG07r+TpT2XKD3P078vozgg+AjmvddtCfnHvXuzKp/wFez1JbyXj4tQAAAABJRU5ErkJggg==">
+  </div>
+  
+  <div class="copy_right_footer">
+    <p> Devloped By<b>Manvi Agarwal</b> </p>
+  </div>
+  
+        </center>
+  <script src="main.js"></script>
+    </body>
+  </html>
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
